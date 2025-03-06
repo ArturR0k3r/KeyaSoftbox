@@ -22,7 +22,7 @@ This project is an open-source RGB LED softbox controlled via an ESP32. It creat
 
 
 ## Housing 
-made in shapr3d and 3d Printed
+Made in shapr3d and 3d Printed
 
 ![image](https://github.com/user-attachments/assets/de884f51-e5bb-4d59-80f5-c997be9d9305)
 ![image](https://github.com/user-attachments/assets/ea596406-5163-4396-8b1b-741b6d90ebff)
