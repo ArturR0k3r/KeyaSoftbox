@@ -5,18 +5,18 @@ This project is an open-source RGB LED softbox controlled via an ESP32. It creat
 This project is an open-source RGB LED softbox controlled via an ESP32. It creates a WiFi hotspot, allowing users to set colors and brightness from a simple web interface.
 
 ## Features
-ESP32-based WiFi control
-RGB LED strip with customizable colors
-Powered by a 18650 battery with TP4056 charger
-Web interface for easy control
+* ESP32-based WiFi control
+* RGB LED strip with customizable colors
+* Powered by a 18650 battery with TP4056 charger
+* Web interface for easy control
 
 
 ## Hardware
-ESP32
-RGB LED strip (WS2812 or similar)
-18650 Li-ion battery
-TP4056 charging module
-5V step-up converter (if needed)
+* ESP32
+* RGB LED strip (WS2812 or similar)
+* 18650 Li-ion battery
+* TP4056 charging module
+* 5V step-up converter (if needed)
 
 ![Schematic_KeyaSoftbox_2025-03-07](https://github.com/user-attachments/assets/44b183ed-8898-4d14-a6af-8821a819be53)
 
@@ -31,9 +31,9 @@ made in shapr3d and 3d Printed
 
 
 ## Installation
-Flash the provided code to your ESP32.
-Connect to the "Softbox-LED" WiFi network (password: 12345678).
-Open a browser and go to http://192.168.4.1/color?r=255&g=0&b=0 to set red color (adjust values as needed).
+* Flash the provided code to your ESP32.
+* Connect to the "Softbox-LED" WiFi network (password: 12345678).
+* Open a browser and go to http://192.168.4.1/color?r=255&g=0&b=0 to set red color (adjust values as needed).
 
 ## License
 This project is open-source under the MIT License.
