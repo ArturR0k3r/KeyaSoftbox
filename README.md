@@ -33,7 +33,7 @@ Made in shapr3d and 3d Printed
 ## Installation
 * Flash the provided code to your ESP32.
 * Connect to the "Softbox-LED" WiFi network (password: 12345678).
-* Open a browser and go to http://192.168.4.1/color?r=255&g=0&b=0 to set red color (adjust values as needed).
+* Open a browser and go to to set http://esp8266.local/ color.
 
 ## License
 This project is open-source under the MIT License.
