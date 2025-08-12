@@ -1,0 +1,5 @@
+menu "KSB Configuration"
+
+source "Kconfig.zephyr"
+
+endmenu

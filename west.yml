@@ -1,0 +1,12 @@
+# west.yml - West workspace manifest
+manifest: 
+  projects:
+    # Zephyr RTOS
+    - name: zephyr
+      url: https://github.com/zephyrproject-rtos/zephyr
+      revision: v4.2-branch
+      west-commands: scripts/west-commands.yml
+      import: true
+      
+  self:
+    path: ksb
