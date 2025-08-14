@@ -18,6 +18,7 @@
 cd .. 
 west init 
 west update 
+west blobs fetch hal_espressif
 
 # If you have issues with esptool when building
 pip3 install --user --upgrade esptool>=5.0.2 --break-system-packages
