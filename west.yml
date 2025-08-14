@@ -9,4 +9,4 @@ manifest:
       import: true
       
   self:
-    path: ksb
+    path: keya-soft-box
