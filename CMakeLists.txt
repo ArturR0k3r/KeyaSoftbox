@@ -2,9 +2,6 @@
 
 cmake_minimum_required(VERSION 3.20.0)
 
-# Set the board target
-set(BOARD esp32s3_devkitm)
-
 # Find Zephyr package and initialize
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
@@ -14,16 +11,18 @@ project(keyasoftbox VERSION 1.0.0)
 # Source files
 target_sources(app PRIVATE 
     src/main.c
-    src/led_effects.c
-    src/mesh_handler.c
-    src/gatt_service.c
 )
+
 
 # Include directories
 target_include_directories(app PRIVATE 
     include
     ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
+message(STATUS "DTS_ROOT is set to: ${DTS_ROOT}")
+message(STATUS "Current source dir: ${CMAKE_CURRENT_SOURCE_DIR}")
+
+
 
 # Compiler definitions
 target_compile_definitions(app PRIVATE
@@ -51,11 +50,17 @@ target_compile_definitions(app PRIVATE
     -DBUILD_TIMESTAMP="${BUILD_TIMESTAMP}"
 )
 
-# Generate version header
-configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/version.h.in
-    ${CMAKE_CURRENT_BINARY_DIR}/include/version.h
-    @ONLY
-)
+# Generate version header if template exists
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/include/version.h.in)
+    configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/version.h.in
+        ${CMAKE_CURRENT_BINARY_DIR}/include/version.h
+        @ONLY
+    )
+    target_include_directories(app PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/include)
+endif()
 
-target_include_directories(app PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/include)
+# Add device tree overlay
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD}.overlay)
+    set(DTC_OVERLAY_FILE ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD}.overlay)
+endif()

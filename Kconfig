@@ -3,3 +3,44 @@ menu "KSB Configuration"
 source "Kconfig.zephyr"
 
 endmenu
+
+
+# Kconfig configuration for custom WS2812B driver
+config WS2812B_STRIP
+    bool "Custom WS2812B LED Strip Driver"
+    depends on LED_STRIP && SPI
+    help
+      Enable custom WS2812B LED strip driver with SPI backend.
+      This driver provides better control and flexibility compared
+      to the generic worldsemi driver.
+
+config WS2812B_STRIP_INIT_PRIORITY
+    int "WS2812B driver initialization priority"
+    default 90
+    help
+      Initialization priority for WS2812B LED strip driver.
+      Must be higher than SPI driver priority.
+
+config WS2812B_MAX_PIXELS
+    int "Maximum number of pixels per strip"
+    default 256
+    range 1 1024
+    help
+      Maximum number of pixels that can be controlled by a single
+      WS2812B strip instance. This affects memory allocation.
+
+config WS2812B_SPI_FREQUENCY
+    int "Default SPI frequency for WS2812B timing"
+    default 4000000
+    range 1000000 10000000
+    help
+      Default SPI frequency in Hz for WS2812B timing generation.
+      4MHz typically works well for most WS2812B strips.
+
+config WS2812B_RESET_DELAY
+    int "Default reset delay in microseconds"
+    default 50
+    range 10 1000
+    help
+      Default reset delay in microseconds between LED updates.
+# WS2812B_STRIP
