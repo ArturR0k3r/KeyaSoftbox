@@ -11,18 +11,18 @@ project(keyasoftbox VERSION 1.0.0)
 # Source files
 target_sources(app PRIVATE 
     src/main.c
+    ws2812/ws2812_driver.c
 )
-
 
 # Include directories
 target_include_directories(app PRIVATE 
     include
     ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/ws2812
 )
+
 message(STATUS "DTS_ROOT is set to: ${DTS_ROOT}")
 message(STATUS "Current source dir: ${CMAKE_CURRENT_SOURCE_DIR}")
-
-
 
 # Compiler definitions
 target_compile_definitions(app PRIVATE
