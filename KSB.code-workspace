@@ -68,7 +68,8 @@
             "charconv": "c",
             "chrono": "c",
             "cstdlib": "c",
-            "cstdint": "c"
+            "cstdint": "c",
+            "regex": "c"
         },
         "editor.formatOnType": true,
         "cortex-debug.variableUseNaturalFormat": false,

@@ -1,0 +1,93 @@
+#include <zephyr/dt-bindings/led/led.h>
+#include <zephyr/dt-bindings/gpio/gpio.h>
+
+/ {
+    chosen {
+        zephyr,console = &uart0;
+        zephyr,shell-uart = &uart0;
+    };
+
+    aliases {
+        ledstrip = &led_strip;
+        sw0 = &button0;
+        led0 = &user_led1;
+        led1 = &user_led2;
+    };
+
+    leds {
+        compatible = "gpio-leds";
+        status = "okay";
+        
+        user_led1: led_0 {
+            gpios = <&gpio0 23 GPIO_ACTIVE_HIGH>;
+            label = "User LED 1";
+        };
+        
+        user_led2: led_1 {
+            gpios = <&gpio0 22 GPIO_ACTIVE_HIGH>;
+            label = "User LED 2";
+        };
+    };
+
+    buttons {
+        compatible = "gpio-keys";
+        status = "okay";
+        
+        button0: button_0 {
+            gpios = <&gpio0 21 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            label = "User Button";
+        };
+    };
+};
+
+&pinctrl {
+    spi3_default: spi3_default {
+        group1 {
+            pinmux = <19>;
+        };
+    };
+    
+    spi3_sleep: spi3_sleep {
+        group1 {
+            pinmux = <19>;
+            input-enable;
+            bias-pull-up;
+        };
+    };
+};
+
+&spi3 {
+    status = "okay";
+    
+    pinctrl-0 = <&spi3_default>;
+    pinctrl-1 = <&spi3_sleep>;
+    pinctrl-names = "default", "sleep";
+
+    led_strip: ws2812@0 {
+        compatible = "worldsemi,ws2812-spi";
+        label = "WS2812";
+        reg = <0>;
+        spi-max-frequency = <4000000>;
+
+        spi-one-frame = <0x70>;
+        spi-zero-frame = <0x40>;
+        
+        chain-length = <8>;
+        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
+        reset-delay = <280>;
+    };
+};
+
+/* Delete existing storage partition if it exists */
+/delete-node/ &storage_partition;
+
+/* Modify the existing flash partitions to add our storage partition */
+&flash0 {
+    partitions {
+        /* Add storage partition at the end of flash */
+        storage_partition: partition@3F0000 {
+            label = "storage";
+            reg = <0x003F0000 0x6000>;  /* 24KB for NVS at near end of 4MB flash */
+        };
+    };
+};

@@ -2,6 +2,12 @@
 
 cmake_minimum_required(VERSION 3.20.0)
 
+
+# Add device tree overlay
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD}.overlay)
+    set(DTC_OVERLAY_FILE ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD}.overlay)
+endif()
+
 # Find Zephyr package and initialize
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
@@ -10,7 +16,12 @@ project(keyasoftbox VERSION 1.0.0)
 
 # Source files
 target_sources(app PRIVATE 
+    src/led_control.c
     src/main.c
+    src/mesh_network.c
+    src/nvs_storage.c
+    src/state_machine.c
+    src/web_config.c
     ws2812/ws2812_driver.c
 )
 
@@ -58,9 +69,4 @@ if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/include/version.h.in)
         @ONLY
     )
     target_include_directories(app PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/include)
-endif()
-
-# Add device tree overlay
-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD}.overlay)
-    set(DTC_OVERLAY_FILE ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD}.overlay)
 endif()

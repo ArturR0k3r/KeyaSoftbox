@@ -1,18 +1,20 @@
 #include "ws2812_driver.h"
 #include <zephyr/logging/log.h>
+#include <zephyr/random/random.h>
+
 LOG_MODULE_REGISTER(ws2812_drv, CONFIG_LOG_DEFAULT_LEVEL);
 
 int ws2812_init(struct ws2812_driver *drv, const char *label)
 {
-    drv->dev = device_get_binding(label);
+    drv->dev = DEVICE_DT_GET(DT_ALIAS(ledstrip));
     if (!drv->dev || !device_is_ready(drv->dev))
     {
-        LOG_ERR("WS2812 device %s not ready", label);
+        LOG_ERR("WS2812 device not ready");
         return -ENODEV;
     }
     drv->running = true;
     ws2812_clear(drv);
-    LOG_INF("WS2812 driver init ok (%s)", label);
+    LOG_INF("WS2812 driver init ok");
     return 0;
 }
 
