@@ -321,25 +321,14 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - Add comments for complex algorithms
 - Include unit tests for new features
 
-## 📋 Roadmap
+## 📋 Versions
 
-### Version 1.1 (Q2 2025)
-- [ ] Mobile app for remote control
+### Version 1.1 (Done)
+- [ ] Web interface for remote control
 - [ ] Advanced LED patterns and effects
 - [ ] Energy-saving sleep modes
 - [ ] Over-the-air (OTA) firmware updates
 
-### Version 2.0 (Q4 2025)  
-- [ ] Battery-powered operation
-- [ ] Environmental sensors integration
-- [ ] Music synchronization
-- [ ] Cloud connectivity and control
-
-### Hardware V2.0
-- [ ] Integrated battery and charging
-- [ ] Temperature and light sensors
-- [ ] Audio output for notifications
-- [ ] Compact PCB design
 
 ## 📄 License
 
